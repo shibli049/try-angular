@@ -13,6 +13,7 @@ export class AppComponent implements OnInit{
 
   query: string;
   artists: object;
+  currentArtist: object;
 
   constructor(private http: HttpClient){
     this.query = "";
@@ -20,8 +21,9 @@ export class AppComponent implements OnInit{
 
   showArtist(e, item){
     console.log(e);
-    this.query = item.name;
+    this.query = "";
     item.highlight = !item.highlight;
+    this.currentArtist = item;
   }
 
   ngOnInit(): void {
