@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   // template: ``,
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'Try-Angular-App';
@@ -12,8 +13,14 @@ export class AppComponent {
   artists: object;
 
   constructor(){
-    this.query = "Shibli";
+    // this.query = "Shibli";
     this.artists = ARTISTS;
+  }
+
+  showArtist(e, item){
+    console.log(e);
+    this.query = item.name;
+    item.highlight = !item.highlight;
   }
 }
 
