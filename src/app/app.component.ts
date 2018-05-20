@@ -1,26 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   // template: ``,
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'] 
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
+  
   title = 'Try-Angular-App';
 
   query: string;
   artists: object;
 
-  constructor(){
-    // this.query = "Shibli";
-    this.artists = ARTISTS;
+  constructor(private http: HttpClient){
+    this.query = "";
   }
 
   showArtist(e, item){
     console.log(e);
     this.query = item.name;
     item.highlight = !item.highlight;
+  }
+
+  ngOnInit(): void {
+    this.http
+      .get<Object>("https://gist.githubusercontent.com/shibli049/4f5c275eea52ac115935e7de1745df99/raw/27d4811f120b784ca9e35182419cffea377439b7/data.json")
+      .subscribe(
+        data => {
+          // console.log("data");
+          this.artists = data;
+        });
   }
 }
 
