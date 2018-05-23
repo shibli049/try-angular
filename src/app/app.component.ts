@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 
 
 @Component({
@@ -11,17 +11,24 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   animations: [
     trigger('myAnimation', [
       state('false', style({
-        // backgroundColor: '#fff'
+        background: '#fff'
       })),
       state('true', style({
-        // backgroundColor: '#fff'
+        background: '#ffcc00'
       })),
       transition('true <=> false', [
-        style({
-          transform: 'translate(20px, 40px)'
-        }),
-        animate('1500ms ease-in')
+        animate('500ms ease-in-out', keyframes([
+          style({ transform: 'translateX(0)', offset: 0 }),
+          style({ transform: 'translateX(50px) translateY(-10px)', offset: 0.4 }),
+          style({ transform: 'translateX(0)', offset: 1 })
+        ]))
       ]),
+      // transition('true <=> false', [
+      //   style({
+      //     transform: 'translate(20px, 40px)'
+      //   }),
+      //   animate('1500ms ease-in')
+      // ]),
 
     ])
   ] 
